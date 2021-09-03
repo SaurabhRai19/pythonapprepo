@@ -35,9 +35,9 @@ resource "azurerm_app_service" "example" {
   app_service_plan_id = azurerm_app_service_plan.example.id
 
   site_config {
-    #linux_fx_version = "DOTNETCORE|3.1"
+    linux_fx_version = "DOTNETCORE|3.1"
     #dotnet_framework_version = "v4.0"
-    python_version = "3.4"
+    python_version = 3.4
     #app_command_line = "dotnet MySampleWebApp.dll"
   }
 }
