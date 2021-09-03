@@ -7,13 +7,15 @@ on:
 env:
   AZURE_WEBAPP_NAME: 'samplepythondemo' 
   AZURE_WEBAPP_PACKAGE_PATH: '.' 
-  SONAR_HOST_URL: http://13.68.189.117:8080
+  SONAR_HOST_URL: 'http://13.68.189.117:8080'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+          fetch-depth: 0
     - name: Set up Python 3.x
       uses: actions/setup-python@v2
       with:
