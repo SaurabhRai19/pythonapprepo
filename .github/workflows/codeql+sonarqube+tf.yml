@@ -123,7 +123,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: publish-profile: ${{ steps.webapp.outputs.profile }}
+          publish-profile: ${{ steps.webapp.outputs.profile }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   
   owasp_zap:
