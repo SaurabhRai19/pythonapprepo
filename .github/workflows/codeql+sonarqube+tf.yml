@@ -1,5 +1,5 @@
 ##
-name: Python web app
+name: Python web app with terraform
 
 on:
   [push]
