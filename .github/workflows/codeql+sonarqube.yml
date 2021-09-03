@@ -35,12 +35,13 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ env.SONAR_HOST_URL }}
-    # If you wish to fail your job when the Quality Gate is red, uncomment the
-    # following lines. This would typically be used to fail a deployment.
-    # - uses: sonarsource/sonarqube-quality-gate-action@master
-    #   timeout-minutes: 5
-    #   env:
-    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+    
+    - name: SonarQube Quality Gate check
+      uses: sonarsource/sonarqube-quality-gate-action@master
+      # Force to fail step after specific time
+      timeout-minutes: 5
+      env:
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     
   codeQL:
     name: Analyze
