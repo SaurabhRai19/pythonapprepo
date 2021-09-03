@@ -37,7 +37,8 @@ resource "azurerm_app_service" "example" {
   site_config {
     ##linux_fx_version = "DOTNETCORE|3.1"
     #dotnet_framework_version = "v4.0"
-    python_version = 3.4
+    linux_fx_version = "PYTHON|3.6"
+    #python_version = 3.4
     #app_command_line = "dotnet MySampleWebApp.dll"
   }
 }
