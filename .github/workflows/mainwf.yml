@@ -1,0 +1,65 @@
+##
+name: Python web app with terraform
+
+on:
+  [push]
+
+env:
+  AZURE_RESOURCE_NAME: 'example-resources1'
+  AZURE_WEBAPP_NAME: 'example-app-service-tf1' 
+  webapp_for_link: example-app-service-tf1
+  AZURE_WEBAPP_PACKAGE_PATH: '.' 
+  SONAR_HOST_URL: 'http://13.68.189.117:8080'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+          fetch-depth: 0
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+  
+    - name: Test cases
+      run: |
+        pip install pytest
+        pip install coverage
+        coverage run -m pytest
+        coverage report -m
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+
+    env:
+      ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+      ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+      ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+      ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+        
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+        
+      - name: Terraform Apply
+        run: terraform apply --auto-approve
