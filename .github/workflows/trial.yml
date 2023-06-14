@@ -2,7 +2,9 @@
 name: Trial workflow
 
 on:
-  [push]
+  push:
+    branches:
+      - main1
 
 jobs:
   build:
