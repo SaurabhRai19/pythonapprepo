@@ -13,8 +13,11 @@ app.config['SECRET_KEY'] = 'samplekey'
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM hospital').fetchall()
+    connectionString = `mongodb+srv://${process.env.DB_USERNAME}:1234578@coding-blog-t0xf0.mongodb.net/<dbname>`
+
     conn.close()
     return render_template('index.html', posts=posts)
+    
 
 
 @app.route('/add', methods=('GET', 'POST'))
