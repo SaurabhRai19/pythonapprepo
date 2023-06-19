@@ -13,9 +13,14 @@ app.config['SECRET_KEY'] = 'samplekey'
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM hospital').fetchall()
-    connectionString = `mongodb+srv://${process.env.DB_USERNAME}:1234578@coding-blog-t0xf0.mongodb.net/<dbname>`
-
-    conn.close()
+   
+    params = 'DRIVER={ODBC Driver 13 for SQL Server};' \
+             'SERVER=localhost;' \
+             'PORT=1433;' \
+             'DATABASE=nb-database;' \
+             'UID=nb-user;' \
+             'PWD=admin1234@;'
+            
     return render_template('index.html', posts=posts)
     
 
