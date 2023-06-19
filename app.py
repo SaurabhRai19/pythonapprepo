@@ -14,13 +14,13 @@ def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM hospital').fetchall()
    
-    params = 'DRIVER={ODBC Driver 13 for SQL Server};' \
-             'SERVER=localhost;' \
-             'PORT=1433;' \
-             'DATABASE=nb-database;' \
-             'UID=nb-user;' \
-             'PWD=admin1234@;'
-            
+    creds = dict(driver='{ODBC Driver 13 for SQL Server}',
+             server='localhost',
+             port=1433,
+             database='nb-database',
+             user='nb-user',
+             passwd='nb-password') 
+    
     return render_template('index.html', posts=posts)
     
 
